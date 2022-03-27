@@ -1,0 +1,12 @@
+node_modules
+.env
+.vscode
+
+#Hardhat files
+cache
+build
+artifacts
+
+#Coverage
+coverage
+coverage.json
