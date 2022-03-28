@@ -302,7 +302,7 @@ contract SpoolStaking is ReentrancyGuardUpgradeable, SpoolOwnable, ISpoolStaking
 		external
 		nonReentrant
 		canStakeForAddress(account)
-		updateRewards(msg.sender)
+		updateRewards(account)
 	{
 		_stake(account, amount);
 		stakingToken.safeTransferFrom(msg.sender, address(this), amount);
