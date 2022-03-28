@@ -23,7 +23,7 @@ interface ISpoolStaking {
 
 	event RewardAdded(IERC20 indexed token, uint256 amount, uint256 duration);
 
-	event RewardExtended(IERC20 indexed token, uint256 amount, uint256 leftover, uint256 duration, uint32 periodFinish);
+	event RewardUpdated(IERC20 indexed token, uint256 amount, uint256 leftover, uint256 duration, uint32 periodFinish);
 
 	event RewardRemoved(IERC20 indexed token);
 

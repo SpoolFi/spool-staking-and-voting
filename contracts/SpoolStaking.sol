@@ -252,13 +252,6 @@ contract SpoolStaking is ReentrancyGuardUpgradeable, SpoolOwnable, ISpoolStaking
 		}
 	}
 
-	/**
-	 * @notice Collects SPOOL rewards from account voSPOOL and transfer them to caller
-	 */
-	function getVoSpoolRewards() external nonReentrant notStakedBy {
-		_getVoSpoolRewards(msg.sender);
-	}
-
 	function getUpdatedVoSpoolRewardAmount() external returns (uint256 rewards) {
 		// update rewards
 		rewards = voSpoolRewards.updateRewards(msg.sender);
@@ -371,7 +364,10 @@ contract SpoolStaking is ReentrancyGuardUpgradeable, SpoolOwnable, ISpoolStaking
 	) external onlyOwner {
 		RewardConfiguration storage config = rewardConfiguration[token];
 		config.rewardsDuration = _rewardsDuration;
-		require(rewardConfiguration[token].lastUpdateTime != 0, "BCFG");
+		require(
+			rewardConfiguration[token].lastUpdateTime != 0,
+			"SpoolStaking::notifyRewardAmount: Token not yet added"
+		);
 		_notifyRewardAmount(token, reward);
 	}
 
@@ -394,7 +390,7 @@ contract SpoolStaking is ReentrancyGuardUpgradeable, SpoolOwnable, ISpoolStaking
 			uint192 newRewardRate = SafeCast.toUint192((reward * REWARD_ACCURACY + leftover) / config.rewardsDuration);
 
 			config.rewardRate = newRewardRate;
-			emit RewardExtended(token, reward, leftover, config.rewardsDuration, newPeriodFinish);
+			emit RewardUpdated(token, reward, leftover, config.rewardsDuration, newPeriodFinish);
 		}
 
 		config.lastUpdateTime = uint32(block.timestamp);
@@ -524,8 +520,8 @@ contract SpoolStaking is ReentrancyGuardUpgradeable, SpoolOwnable, ISpoolStaking
 	}
 
 	function _min(uint256 a, uint256 b) private pure returns (uint256) {
-        return a > b ? b : a;
-    }
+		return a > b ? b : a;
+	}
 
 	/* ========== MODIFIERS ========== */
 

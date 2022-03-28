@@ -74,7 +74,7 @@ contract VoSpoolRewards is SpoolOwnable, IVoSpoolRewards {
 	/* ========== CONSTANTS ========== */
 
 	/// @notice amount of tranches to mature to full power
-	uint256 public constant FULL_POWER_TRANCHES_COUNT = 52 * 3;
+	uint256 private constant FULL_POWER_TRANCHES_COUNT = 52 * 3;
 
 	/// @notice number of tranche amounts stored in one 256bit word
 	uint256 private constant TRANCHES_PER_WORD = 5;
