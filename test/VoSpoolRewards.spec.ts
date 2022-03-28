@@ -54,7 +54,6 @@ describe("VoSpoolRewards tests", () => {
 				.deploy(spoolStaking.address, voSpool.address, spoolOwner.address);
 
 			// ASSERT
-			expect(await voSpoolRewards.FULL_POWER_TRANCHES_COUNT()).to.be.equal(WEEKS_3_YEARS);
 			expect(await voSpoolRewards.spoolStaking()).to.be.equal(spoolStaking.address);
 			expect(await voSpoolRewards.voSpool()).to.be.equal(voSpool.address);
 		});
