@@ -30,4 +30,6 @@ interface ISpoolStaking {
 	event PeriodFinishUpdated(IERC20 indexed token, uint32 periodFinish);
 
 	event CanStakeForSet(address indexed account, bool canStakeFor);
+
+	event UnstakeAllowed(address indexed allowFor, address indexed allowBy);
 }
