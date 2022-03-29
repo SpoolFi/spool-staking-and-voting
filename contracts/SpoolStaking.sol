@@ -321,6 +321,8 @@ contract SpoolStaking is ReentrancyGuardUpgradeable, SpoolOwnable, ISpoolStaking
 		);
 		// reset address to 0 to allow unstaking
 		stakedBy[allowFor] = address(0);
+
+		emit UnstakeAllowed(allowFor, msg.sender);
 	}
 
 	/**
